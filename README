@@ -1,0 +1,32 @@
+Radulescu Adrian-Razvan 334CB
+Grupa 334CB
+
+
+Pentru parsarea si crearea JSON am folosit libraria parson datorita simplitatii sale.
+Am pastrat functiile compute_post_json si compute_get_json din laboratorul 10. La care am adaugat
+campul de token JWT pentru accesul la librarie.
+In implementarea temei folosesc o bucla while in care utilizatorul poate introduce comenzi de la tastatura
+pana la introducerea comenzii exit.
+
+Comanda register: Citesc de la tastatura in continuare numele de utilizator si parola pentru a inregistra un
+nou user. Creez un string de JSON cu datele citite de la tastatura si apelez comanda POST conform enuntului.
+In cazul unei erori parsez JSON-ul primit si afisez eroarea.
+
+Comanda login: Citesc de la tastatura username-ul si parola si creez un obiect json de tip string cu informatiile citite si trimit un post request catre server. Apoi folozind functia get_cookie voi extrage cookie-ul existent in
+raspunsul de la server pe care il voi stoca intr-un char** conform functiilor post si get request. Cookie-ul existent il voi folosi pana cand se va apela logout sau exit.
+
+Comanda enter_library: Apelez functia post request cu cookie-ul de login aflat dupa comanda login. Extrag json-ul din primit ca raspuns de la server pe care il parsez pentru a extrage token-ul ce urmeaza a fi folosit pentru a demonstra accesul la librarie,
+
+Comanda get_books: Apelez functia compute_get_request cu token-ul si cookie-ul aflate din comenzile de mai sus. In cazut in care unul dintre aceste campuri este NULL voi primi eroare de la server. Apoi afisez cartile primite in caz de succes in format json.
+
+Comanda get_book: Analog comenzii get_books, diferenta fiind in formatul url-ului.
+
+Comanda add_book: Citesc de la tastatura datele aferente cartii pe care vreau sa o adaug in librarie. Creez un string json cu datele citite de la tastatura si creez un mesaj de tip post_request pe care il trimit serverului. Afizez eventualele erori sau "Book was added succesfully." in caz de succes.
+
+Comanda delete_book: Pentru metoda delete_book am creat o functie compute_delete_request() asemanatoare functiilor post si get pe care o folosesc pentru a sterge o carte din librarie. Folosesc cookie-ul si token-ul JWT pentru a demonstra faptul ca sunt logat si am acces la biblioteca.
+
+Comanda logout: Trimit o comanda de tip get_request serverului folosind cookie-ul de logare. Afisez erorile in caz ca exista sau "Logout succesfully." in caz de succes.
+
+Comanda exit: Ies din bucla while.
+
+La final eliberez memoria alocata.
